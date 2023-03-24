@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
 	vector<int> backLinks; // Stores index of nodes (use -1 instead of NULL)
 	vector<int> distances; // Cost to go from start to node (-1 if unvisited)
 	// Dev Note: May or may not need visited vector of bools
+	multimap<int, int> paths; // Key = Distance from the starting node to the node; Val = the node (vect index) itself
 
 	while(cin >> nTiles) {
 		// Stores info of each tile type
@@ -34,11 +35,18 @@ int main(int argc, char *argv[]) {
 		// Read in runner's path info
 		cin >> sRow >> sCol >> eRow >> eCol;
 
+		// Dev Note: May or may not need an adjacency list/matrix to store edges before starting Dijkstras
+		// Dev Note: Alternatively, can check for edges while processing nodes
+
+		// For reference: (cRow = current row, cCol = current column)
+		// Up = vect[(cRow - 1) * nCols + cCol], Down = vect[(cRow + 1) * nCols + cCol]
+		// Left = vect[cRow * nCols + cCol - 1], Right = vect[cRow * nCols + cCol + 1]
+
 		// Run Dijkstras
-		// Dev Note: Need multi map
-		// Set starting node to 0
+		// Set starting node to 0 and add it to multimap
 		distances[sRow * nCols + sCol] = 0;
-		// Dev Note: Add starting node to multi map
+		paths.insert(pair<int, int>(0, sRow * nCols + sCol));
+		// Dev Note: Start Dijkstras loop here. Need to research when loop terminates
 	}
 	return 0;
 }
