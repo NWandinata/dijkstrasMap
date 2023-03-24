@@ -1,6 +1,7 @@
 // dijsktras.cpp
 #include <iostream>
 #include <map>
+#include <vector>
 
 using namespace std;
 
@@ -8,6 +9,7 @@ int main(int argc, char *argv[]) {
 	int nTiles, tileCost, nRows, nCols, sRow, sCol, eRow, eCol;
 	char tileType;
 	map<char, int> costs;
+	vector<int> mapCosts; // Regular vector representing 2D vector
 
 	while(cin >> nTiles) {
 		// Stores info of each tile type
@@ -16,10 +18,13 @@ int main(int argc, char *argv[]) {
 			costs.insert({tileType, tileCost});
 		}
 
+		// Reads in the map and stores as cost
 		cin >> nRows >> nCols;
-		// Read in tiles and store into container
-		// Regular vector representing 2D vector
-		// Vector of ints containing costs (use map to convert)
+		for(int i = 0; i < nRows * nCols; i++) {
+			cin >> tileType;
+			tileCost = costs[tileType];
+			mapCosts.push_back(tileCost);
+		}
 		
 		// Read in runner's path info
 		cin >> sRow >> sCol >> eRow >> eCol;
