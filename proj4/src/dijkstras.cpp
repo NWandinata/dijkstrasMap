@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
 	vector<int> mapCosts; // Regular vector representing 2D vector
 	vector<int> backLinks; // Stores index of nodes (use -1 instead of NULL)
 	vector<int> distances; // Cost to go from start to node (-1 if unvisited)
-
+	// Dev Note: May or may not need visited vector of bools
 
 	while(cin >> nTiles) {
 		// Stores info of each tile type
@@ -35,7 +35,10 @@ int main(int argc, char *argv[]) {
 		cin >> sRow >> sCol >> eRow >> eCol;
 
 		// Run Dijkstras
-		// Need adjacency list
+		// Dev Note: Need multi map
+		// Set starting node to 0
+		distances[sRow * nCols + sCol] = 0;
+		// Dev Note: Add starting node to multi map
 	}
 	return 0;
 }
