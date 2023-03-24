@@ -18,12 +18,14 @@ int main(int argc, char *argv[]) {
 
 		cin >> nRows >> nCols;
 		// Read in tiles and store into container
-		// Regular vector representing 2D vector?
+		// Regular vector representing 2D vector
+		// Vector of ints containing costs (use map to convert)
 		
 		// Read in runner's path info
 		cin >> sRow >> sCol >> eRow >> eCol;
 
 		// Run Dijsktras
+		// Need adjacency list
 	}
 	return 0;
 }
