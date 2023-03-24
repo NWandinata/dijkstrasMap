@@ -18,12 +18,14 @@ int main(int argc, char *argv[]) {
 			costs.insert({tileType, tileCost});
 		}
 
-		// Reads in the map and stores as cost
+		// Reads in the map, stores as cost, and set up Dijsktras
 		cin >> nRows >> nCols;
 		for(int i = 0; i < nRows * nCols; i++) {
 			cin >> tileType;
 			tileCost = costs[tileType];
 			mapCosts.push_back(tileCost);
+
+
 		}
 		
 		// Read in runner's path info
