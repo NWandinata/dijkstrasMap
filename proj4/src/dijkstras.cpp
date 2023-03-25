@@ -6,12 +6,12 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	int nTiles, tileCost, nRows, nCols, sRow, sCol, eRow, eCol, index, up, down, left, right, row, col;
+	int nTiles, tileCost, nRows, nCols, sRow, sCol, eRow, eCol, index, up, down, left, right, row, col, edgeIndex, dist;
 	char tileType;
 	map<char, int> costs;
 	vector<int> mapCosts; // Regular vector representing 2D vector
 	vector<int> backLinks; // Stores index of nodes (use -1 instead of NULL)
-	vector<int> distances; // Cost to go from start to node
+	vector<int> distances; // Cost to go from start to node (-1 if unvisited)
 	// Dev Note: May or may not need visited vector of bools
 	vector<int> edges;
 	multimap<int, int> paths; // Key = Distance from the starting node to the node; Val = the node (vect index) itself
@@ -73,12 +73,27 @@ int main(int argc, char *argv[]) {
 			edges.push_back(left);
 			edges.push_back(right);
 
+			dist = distances[index] + mapCosts[index];
 			for(int i = 0; i < edges.size(); i++) {
-				if(edges[i] == -1) continue;
+				edgeIndex = edges[i];
+				if(edgeIndex == -1) continue;
+
+				// Connected node is unvisited or its distance is shorter
+				if(distances[edgeIndex] == -1 || distances[edgeIndex] < dist) {
+					// Remove node from multimap if already there (may need iterators)
+
+					// Updates distance and back-link
+					distances[edgeIndex] = dist;
+					backLinks[edgeIndex] = index;
+					paths.insert(pair<int, int>(dist, edgeIndex));
+				}
 			}
+
+			edges.clear()
 		}
 		
 		// Dev Note: After Dijkstras is finished, sum distance and use back links to get path
+
 	}
 	return 0;
 }
