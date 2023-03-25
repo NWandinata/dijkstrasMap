@@ -14,6 +14,7 @@ int main(int argc, char *argv[]) {
 	vector<int> distances; // Cost to go from start to node (-1 if unvisited)
 	// Dev Note: May or may not need visited vector of bools
 	vector<int> edges;
+	vector<int> finalPath;
 	multimap<int, int> paths; // Key = Distance from the starting node to the node; Val = the node (vect index) itself
 
 	while(cin >> nTiles) {
@@ -35,9 +36,6 @@ int main(int argc, char *argv[]) {
 		
 		// Read in runner's path info
 		cin >> sRow >> sCol >> eRow >> eCol;
-
-		// Dev Note: May or may not need an adjacency list/matrix to store edges before starting Dijkstras
-		// Dev Note: Alternatively, can check for edges while processing nodes
 
 		// For reference: (cRow = current row, cCol = current column)
 		// Up = vect[(cRow - 1) * nCols + cCol], Down = vect[(cRow + 1) * nCols + cCol]
@@ -73,6 +71,7 @@ int main(int argc, char *argv[]) {
 			edges.push_back(left);
 			edges.push_back(right);
 
+			// Process all connected nodes
 			dist = distances[index] + mapCosts[index];
 			for(int i = 0; i < edges.size(); i++) {
 				edgeIndex = edges[i];
@@ -92,8 +91,24 @@ int main(int argc, char *argv[]) {
 			edges.clear()
 		}
 		
-		// Dev Note: After Dijkstras is finished, sum distance and use back links to get path
+		// Dev Note: After Dijkstras is finished, use back links to get path
+		// Total obtained through distances vector
+		finalPath.push_back(eRow * nCols + eCol);
+		index = backLinks[eRow * nCols + eCol];
 
+		while(index != -1) {
+			finalPath.push_back(index);
+			index = backLinks[index];
+		}
+
+		// Print shortest path and its distance
+		cout << distances[eRow * nCols + eCol] << endl;
+		for(int = 0; i < finalPath.size(); i++) {
+			index = finalPath[i];
+			row = index / nCols;
+            col = index % nCols;
+			cout << row << " " << col << endl;
+		}
 	}
 	return 0;
 }
