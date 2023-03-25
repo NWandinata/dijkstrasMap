@@ -73,8 +73,10 @@ int main(int argc, char *argv[]) {
 			if(edgeIndex == -1) continue;
 
 			// Connected node is unvisited or its distance is shorter
-			if(distances[edgeIndex] == -1 || distances[edgeIndex] < dist) {
+			if(distances[edgeIndex] == -1 || distances[edgeIndex] > dist) {
 				// Remove node from multimap if already there (may need iterators)
+				//typedef multimap<int, int>::iterator iterator;
+				//pair<iterator, iterator> iterpair = mymap.equal_range(dist);
 
 				// Updates distance and back-link
 				distances[edgeIndex] = dist;
@@ -98,7 +100,7 @@ int main(int argc, char *argv[]) {
 
 	// Print shortest path and its distance
 	cout << distances[eRow * nCols + eCol] << endl;
-	for(int i = 0; i < finalPath.size(); i++) {
+	for(int i = finalPath.size() - 1; i >= 0; i--) {
 		index = finalPath[i];
 		row = index / nCols;
 		col = index % nCols;
