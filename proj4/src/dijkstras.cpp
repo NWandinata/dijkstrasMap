@@ -1,4 +1,10 @@
+// Makenzie Johnson and Nicholas Wandinata
 // dijkstras.cpp
+// Element removal in Dijkstras from: https://stackoverflow.com/questions/3952476/how-to-remove-a-specific-pair-from-a-c-multimap
+
+/* This program reads in a grid of tiles and a starting and ending position. Each tile has an associated cost of leaving it.
+   The program calculates the shortest path from the starting point to the end using Dijkstras. */
+
 #include <iostream>
 #include <map>
 #include <vector>
@@ -16,8 +22,8 @@ int main(int argc, char *argv[]) {
 	vector<int> finalPath;
 	multimap<int, int> paths; // Key = Distance from the starting node to the node; Val = the node (vect index) itself
 
-	cin >> nTiles;
 	// Stores info of each tile type
+	cin >> nTiles;
 	for(int i = 0; i < nTiles; i++) {
 		cin >> tileType >> tileCost;
 		costs.insert({tileType, tileCost});
@@ -74,9 +80,18 @@ int main(int argc, char *argv[]) {
 
 			// Connected node is unvisited or its distance is shorter
 			if(distances[edgeIndex] == -1 || distances[edgeIndex] > dist) {
-				// Remove node from multimap if already there (may need iterators)
-				//typedef multimap<int, int>::iterator iterator;
-				//pair<iterator, iterator> iterpair = mymap.equal_range(dist);
+				// Remove node from multimap if already there
+				if(distances[edgeIndex] != -1) {
+					typedef multimap<int, int>::iterator iterator;
+					pair<iterator, iterator> iterpair = paths.equal_range(dist);
+					iterator it = iterpair.first;
+					for (; it != iterpair.second; ++it) {
+						if (it->second == edgeIndex) {
+							paths.erase(it);
+							break;
+						}
+					}
+				}
 
 				// Updates distance and back-link
 				distances[edgeIndex] = dist;
@@ -88,8 +103,8 @@ int main(int argc, char *argv[]) {
 		edges.clear();
 	}
 	
-	// Dev Note: After Dijkstras is finished, use back links to get path
-	// Total obtained through distances vector
+	// After Dijkstras is finished, use back links to get path
+	// Total cost is obtained through distances vector
 	finalPath.push_back(eRow * nCols + eCol);
 	index = backLinks[eRow * nCols + eCol];
 
