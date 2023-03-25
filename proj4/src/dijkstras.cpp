@@ -6,13 +6,14 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	int nTiles, tileCost, nRows, nCols, sRow, sCol, eRow, eCol;
+	int nTiles, tileCost, nRows, nCols, sRow, sCol, eRow, eCol, index, up, down, left, right, row, col;
 	char tileType;
 	map<char, int> costs;
 	vector<int> mapCosts; // Regular vector representing 2D vector
 	vector<int> backLinks; // Stores index of nodes (use -1 instead of NULL)
-	vector<int> distances; // Cost to go from start to node (-1 if unvisited)
+	vector<int> distances; // Cost to go from start to node
 	// Dev Note: May or may not need visited vector of bools
+	vector<int> edges;
 	multimap<int, int> paths; // Key = Distance from the starting node to the node; Val = the node (vect index) itself
 
 	while(cin >> nTiles) {
@@ -46,7 +47,38 @@ int main(int argc, char *argv[]) {
 		// Set starting node to 0 and add it to multimap
 		distances[sRow * nCols + sCol] = 0;
 		paths.insert(pair<int, int>(0, sRow * nCols + sCol));
-		// Dev Note: Start Dijkstras loop here. Need to research when loop terminates
+		while(!paths.empty()) {
+			// Remove node from front of the multimap
+			index = paths.begin()->second;
+			paths.erase(paths.begin());
+
+			// Check for connected nodes (-1 if doesn't exist)
+			row = index / nCols;
+			col = index % nCols;
+
+			if(row == 0) up = -1;
+			else up = index - nCols;
+
+			if(row == nCols - 1) down = -1;
+			else down = index + nCols;
+
+			if(col == 0) left = -1;
+			else left = index - 1;
+
+			if(col == nCols - 1) right = -1;
+			else right = index + 1;
+
+			edges.push_back(up);
+			edges.push_back(down);
+			edges.push_back(left);
+			edges.push_back(right);
+
+			for(int i = 0; i < edges.size(); i++) {
+				if(edges[i] == -1) continue;
+			}
+		}
+		
+		// Dev Note: After Dijkstras is finished, sum distance and use back links to get path
 	}
 	return 0;
 }
