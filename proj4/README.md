@@ -1,30 +1,15 @@
 Project 04: Path Finding
 ========================
 
-This project implements a [Dijkstra's Algorithm] to perform rudimentary path
-finding on a 2D tile-based map.
+Group Members: Makenzie Johnson and Nicholas Wadinata
 
-[Dijkstra's Algorithm]: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
-
-
-Input
------
-
-    TILES_N
-    TILE_NAME_0	TILE_COST_0
-    ...
-    TILE_NAME_N-1	TILE_COST_N-1
-
-    MAP_ROWS MAP_COLUMNS
-    TILE_0_0    ...
-    ...
-
-    TRAVELER_START_ROW TRAVELER_START_COL
-    TRAVELER_END_ROW   TRAVELER_END_COL
-
-Output
-------
-
-    Cost
-    [(ROW_0, COL_0), ...]
-
+| N             | Elapsed Time  | Memory Usage    | <- Total bytes allocated
+|---------------|---------------|---------------- |
+| 10            | ...           | 90,572 bytes    |
+| 20            | ...           | 115,036 bytes   |
+| 50            | ...           | 309,228 bytes   |
+| 100           | ...           | 992,516 bytes   |
+| 200           | ...           | 3,726,484 bytes |
+| 500           | ...           | 19,274,900 bytes|
+| 1000          | ...           | 76,905,820 bytes|
+|---------------|---------------|-----------------|
