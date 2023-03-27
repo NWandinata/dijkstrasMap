@@ -1,0 +1,18 @@
+Group Members: Makenzie Johnson and Nicholas Wadinata
+
+Makenzie: Created a file that generated random maps and created text files to hold different map sizes. Also worked
+on the benchmark and answered the questions.
+
+Nicholas: Worked on dijkstras.cpp, the benchmark, and answer the questions.
+
+
+Questions:
+
+1. How did you represent the map as a graph?
+
+2. What is complexity of your implementation of Dijkstra's Algorithm?
+
+3. How well does your implementation scale?
+
+All of the maps ran extremely fast; all less than 1 second. But for memory usage, it wasn't too bad for the first few maps. 
+However, we managed to allocate 76 millon bytes (76 MB) which is a lot for a simple file.
