@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
 
 		// Process all connected nodes
 		dist = distances[index] + mapCosts[index];
-		for(int i = 0; i < edges.size(); i++) {
+		for(unsigned int i = 0; i < edges.size(); i++) {
 			edgeIndex = edges[i];
 			if(edgeIndex == -1) continue;
 
