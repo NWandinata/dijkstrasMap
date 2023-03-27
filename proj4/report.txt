@@ -3,12 +3,17 @@ Group Members: Makenzie Johnson and Nicholas Wadinata
 Makenzie: Created a file that generated random maps and created text files to hold different map sizes. Also worked
 on the benchmark and answered the questions.
 
-Nicholas: Worked on dijkstras.cpp, the benchmark, and answer the questions.
+Nicholas: Worked on dijkstras.cpp, the benchmark, and answered the questions.
 
 
 Questions:
 
 1. How did you represent the map as a graph?
+
+We used a 1D vector that represented a 2D vector (similarly to SuperBall where index = row * numCols + Col) 
+to store the cost (weights) of leaving each node. We processed edges as we go in Dijkstra's by storing the 
+coordinates of adjacent nodes (up, down, left, right) in a vector. However, in the event a node didn't exist
+(i.e. top row doesn't have any adjacent nodes above), it would be stored as -1 in the vector.
 
 2. What is complexity of your implementation of Dijkstra's Algorithm?
 
