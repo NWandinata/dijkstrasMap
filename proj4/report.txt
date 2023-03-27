@@ -17,6 +17,15 @@ coordinates of adjacent nodes (up, down, left, right) in a vector. However, in t
 
 2. What is complexity of your implementation of Dijkstra's Algorithm?
 
+O(n + V + Elog(V))
+We must visit all vertices once which is O(V) which is done using by checking if the distance is -1 before 
+adding a vertex to the multimap, so each node is only added to the multimap once unless we find a shorter path.
+We must also visit each edge once O(E), and when visiting each edge, we may need to add it to the multimap. 
+Adding to the multimap is O(Elog(V)) in the worse case since we may have to iterate through all vertices
+associated with a specific weight. Then, we used a vector to traverse backlinks (stored as coordinates) starting 
+with the destination until we reach the starting vertex; this is O(n) rather than O(V) since the shortest path 
+(assuming the map is always square) will never visit every single vertex.
+
 3. How well does your implementation scale?
 
 All of the maps ran extremely fast; all less than 1 second. But for memory usage, it wasn't too bad for the first few maps. 
